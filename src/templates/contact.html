@@ -1,0 +1,11 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Contacts</h1>
+{% if my_text == ariel %}
+<p>{{ my_text }}, ({{ my_number }})<p>
+{% else %}
+ <p>PLEASE LOGIN!</p>
+ {% endif %}
+{% endblock %}

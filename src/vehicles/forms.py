@@ -6,5 +6,6 @@ class VehicleForm(forms.ModelForm):
     class Meta:
         model = Vehicle
         fields = [
-            'vehicle_id', 'vehicle_type', 'checked'
+            'vehicle_id', 'vehicle_type', 'image_url',
+             'checked'
         ]

@@ -7,7 +7,7 @@ def vehicle_view(request, *args, **kwargs):
     vehicles = Vehicle.objects.all()
     return render(request, "vehicle/vehicle.html", {'vehicles': vehicles})
 
-def vehicle_create_view(request, *args, **kwargs):
+def vehicle_create_view(request):
     form = VehicleForm(request.POST or None)
     if form.is_valid():
         form.save()

@@ -11,6 +11,7 @@ def vehicle_create_view(request):
     form = VehicleForm(request.POST or None)
     if form.is_valid():
         form.save()
+        form = VehicleForm()
     
     context = {
         'form': form

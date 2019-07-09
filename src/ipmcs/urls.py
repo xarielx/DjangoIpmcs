@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from pages.views import home_view, contact_view
+from training_manuals.views import training_manual_view
 from vehicles.views import vehicle_view, vehicle_create_view
 
 #request.user
@@ -25,6 +26,7 @@ urlpatterns = [
     path('contact/', contact_view, name='contact'),
     path('vehicles/', vehicle_view, name='vehicle'),
     path('create/', vehicle_create_view, name='create'),
+    path('training_manual/', training_manual_view, name = 'tm'),
     path('admin/', admin.site.urls),
     
 ]

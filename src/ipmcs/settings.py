@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     #third party
 
     #own
-    'vehicles', 'pages',
+    'vehicles', 'pages', 'training_manuals'
 ]
 
 MIDDLEWARE = [

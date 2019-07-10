@@ -4,15 +4,16 @@ from .models import Training_Manual
 from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/accounts/login/')
-def training_manual_view(request, id):
-    obj = Training_Manual.objects.get(id=id)
+def training_manual_view(request):
+    obj = Training_Manual.objects.all()
     context = {
         "tms": obj
     }
     tms = Training_Manual.objects.all()
-    return render(request, "training_manuals/tm.html", context)
+    return render(request, "training_manuals/tm_list.html", context)
 
 
+@login_required(login_url='/accounts/login/')
 def tm_detail_view(request, id):
     obj = get_object_or_404(Training_Manual, id=id)
     obj1 = Training_Manual.objects.get(pk=id+1)

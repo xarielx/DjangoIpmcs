@@ -28,7 +28,7 @@ urlpatterns = [
     path('vehicles/', vehicle_view, name='vehicle'),
     path('vehicles/create/', vehicle_create_view, name='create'),
     path('training_manual/<int:id>/', tm_detail_view, name='tm-detail'),
-    #path('training_manual/<int:id>', training_manual_view, name = 'tm'),
+    path('training_manual/', training_manual_view, name = 'tm'),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', TemplateView.as_view(template_name='home.html'), name='home'), # new

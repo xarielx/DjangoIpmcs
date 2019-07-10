@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>{{ object.interval }}</p>
+<p>{{ object.location_item_to_check }}</p>
+<p>{{ object.crewmember_procedure }}</p>
+<p>{{ object.nfmc_if }}</p>
+<li class="btn btn-block btn-responsive"  style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 10px"><a href="/training_manual/{{ object_list.id }}">Next</a></li>
+{% endblock %}

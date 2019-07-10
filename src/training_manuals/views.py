@@ -1,7 +1,26 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Training_Manual
 # Create your views here.
+from django.contrib.auth.decorators import login_required
 
-def training_manual_view(request, *args, **kwargs):
+@login_required(login_url='/accounts/login/')
+def training_manual_view(request, id):
+    obj = Training_Manual.objects.get(id=id)
+    context = {
+        "tms": obj
+    }
     tms = Training_Manual.objects.all()
-    return render(request, "training_manuals/tm.html", {'tms': tms})
+    return render(request, "training_manuals/tm.html", context)
+
+
+def tm_detail_view(request, id):
+    obj = get_object_or_404(Training_Manual, id=id)
+    obj1 = Training_Manual.objects.get(pk=id+1)
+    queryset = Training_Manual.objects.all()
+    context = {
+        "object": obj,
+        "object_list": obj1 
+    }
+    return render(request, "training_manuals/tm.html", context)
+
+    

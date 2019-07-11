@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
   {% block content %}
-
+  {% load staticfiles %}
      <h5>Hello {{ user.first_name }} {{ user.last_name }} </h5>
 
     <h1>Welcome to iPMCS<h1>
@@ -10,7 +10,7 @@
           <img class="d-block w-50 h-50" src="https://raw.githubusercontent.com/xarielx/iPMCS/master/carcheck.jpg?token=AIV6GACYCSDSN7YXVX2JAA25FZOQM" alt="First slide">
         </div>
         <div class="carousel-item">
-          <img class="d-block  w-50 h-50" src="https://upload.wikimedia.org/wikipedia/commons/7/75/LockheedMartinLogo.png" alt="Second slide">
+          <img class="d-block  w-50 h-50" src="{% static "img\tank.png"  %}" alt="Second slide">
         </div>
         <div class="carousel-item">
           <img class="d-block  w-50 h-50" src="https://live.staticflickr.com/8193/8125893695_d4fb91d749_b.jpg" alt="Third slide">

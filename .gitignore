@@ -333,3 +333,5 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 src/sqlite3.exe
+src/.vscode/settings.json
+src/.vscode/settings.json

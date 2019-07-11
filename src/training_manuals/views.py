@@ -1,13 +1,17 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Training_Manual
+import datetime
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/accounts/login/')
 def training_manual_view(request):
     obj = Training_Manual.objects.all()
+    now = datetime.datetime.now()
+    current_time = now.strftime("%Y-%m-%d %H:%M:%S")
     context = {
-        "tms": obj
+        "tms": obj,
+        "ct": current_time        
     }
     tms = Training_Manual.objects.all()
     return render(request, "training_manuals/tm_list.html", context)

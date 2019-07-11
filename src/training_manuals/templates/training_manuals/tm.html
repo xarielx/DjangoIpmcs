@@ -1,11 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<table class="table table-bordered table-dark table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Item No.</th>
+      <th scope="col">Interval</th>
+      <th scope="col">Location: Item to Check/Service</th>
+      <th scope="col">Crewmember Procedure</th>
+      <th class="table-warning" style="color: red;font-weight:bold" scope="col">Not Fully Mission Capable If</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ object.id }}</td>
+      <td>{{ object.interval }}</td>
+      <td>{{ object.location_item_to_check }}</td>
+      <td>{{ object.crewmember_procedure }}</td>
+      <td class="table-danger" style="color: black;">{{ object.nfmc_if }}<div class="form-check">
+    <input type="checkbox" class="form-check-input" id="NFMC">
+    <label class="form-check-label" for="NFMC" style="color: red;font-weight:bold">Check if vehicle is NFMC</label>
+  </div></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>{{ object.interval }}</p>
-<p>{{ object.location_item_to_check }}</p>
-<p>{{ object.crewmember_procedure }}</p>
-<p>{{ object.nfmc_if }}</p>
 <button style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 10px" onclick="submitPoll(id);" id="myButton" class="float-left submit-button" >Next</button>
 
 <script>

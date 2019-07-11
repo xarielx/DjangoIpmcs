@@ -21,10 +21,13 @@ def training_manual_view(request):
 def tm_detail_view(request, id):
     obj = get_object_or_404(Training_Manual, id=id)
     obj1 = Training_Manual.objects.get(pk=id+1)
+    x = Training_Manual.objects.get(pk=id).id
+    y = (x / 5) * 100;
     queryset = Training_Manual.objects.all()
     context = {
         "object": obj,
-        "object_list": obj1 
+        "object_list": obj1 ,
+        "y": y
     }
     return render(request, "training_manuals/tm.html", context)
 

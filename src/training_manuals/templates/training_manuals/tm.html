@@ -39,8 +39,8 @@
 <script>
   function submitPoll(id) {
     document.getElementById("myButton").disabled = true;
-    setTimeout(function () { alert('You need to complete this task in 2 minutes, not less') }, 300);
-    setTimeout(function () { document.getElementById("myButton").disabled = false; alert('Task Complete!'); window.location.href = "/{{ object_list }}/"; }, 2000);
+    setTimeout(function () { alert('You need to complete this task in 2 minutes, not less') });
+    setTimeout(function () { document.getElementById("myButton").disabled = false; alert('Task Complete!'); window.location.href = "/{{ object_list }}/"; }, 20000);
   }
   $.ajax({
     statusCode: {

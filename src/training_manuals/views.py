@@ -25,7 +25,7 @@ def tm_detail_view(request, id):
     count = Training_Manual.objects.count()
    # obj1 = Training_Manual.objects.get(pk=id+1)
     current = Training_Manual.objects.get(pk=id).id
-    prog_percent = ((current - 0.3) / count) * 100
+    prog_percent = round(((current - 0.3) / count) * 100)
     queryset = Training_Manual.objects.all()
     if current == count:
         obj1 = "complete"

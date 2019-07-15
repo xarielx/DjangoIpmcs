@@ -5,6 +5,7 @@ import datetime
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 
+
 @login_required(login_url='/accounts/login/')
 def training_manual_view(request):
     obj = Training_Manual.objects.all()
@@ -12,7 +13,7 @@ def training_manual_view(request):
     current_time = now.strftime("%Y-%m-%d %H:%M:%S")
     context = {
         "tms": obj,
-        "ct": current_time        
+        "ct": current_time
     }
     tms = Training_Manual.objects.all()
     return render(request, "training_manuals/tm_list.html", context)
@@ -21,15 +22,26 @@ def training_manual_view(request):
 @login_required(login_url='/accounts/login/')
 def tm_detail_view(request, id):
     obj = get_object_or_404(Training_Manual, id=id)
-    obj1 = Training_Manual.objects.get(pk=id+1)
-    x = Training_Manual.objects.get(pk=id).id
-    y = (x / 5) * 100;
+    count = Training_Manual.objects.count()
+   # obj1 = Training_Manual.objects.get(pk=id+1)
+    current = Training_Manual.objects.get(pk=id).id
+    prog_percent = round(((current - 0.3) / count) * 100)
     queryset = Training_Manual.objects.all()
+    if current == count:
+        obj1 = "complete"
+    else:
+        url = "training_manual/"
+        cnt = current + 1  # Training_Manual.objects.get(pk=id+1)
+        obj1 = url + str(cnt)
+
     context = {
         "object": obj,
-        "object_list": obj1 ,
-        "y": y
+        "object_list": obj1,
+        "y": prog_percent,
     }
     return render(request, "training_manuals/tm.html", context)
 
-    
+
+@login_required(login_url='/accounts/login/')
+def tm_complete(request):
+    return render(request, "training_manuals/complete.html")

@@ -60,6 +60,7 @@
   function next() {
     window.location.href = "/{{ object_list }}/";
   }
+
   $("#myButton").click(function () {
     $("#container").append('<p align="center" id="counter"></p></div><div class="spinner-grow text-primary" role="status">  <span class="sr-only">Loading...</span></div><div class="spinner-grow text-secondary" role="status">  <span class="sr-only">Loading...</span></div><div class="spinner-grow text-success" role="status">  <span class="sr-only">Loading...</span></div><div class="spinner-grow text-danger" role="status">  <span class="sr-only">Loading...</span></div><div class="spinner-grow text-warning" role="status">  <span class="sr-only">Loading...</span></div><div class="spinner-grow text-info" role="status">  <span class="sr-only">Loading...</span></div><div class="spinner-grow text-dark" role="status">  <span class="sr-only">Loading...</span></div>');
   });
@@ -73,6 +74,23 @@
       document.getElementById("counter").innerHTML = minutes + "m " + seconds + "s "; 
     }
   }, 1000);
+
+  jQuery(document).ready(function() {
+    jQuery('#NFMC').change(function() {
+        if ($(this).prop('checked')) {
+            if (confirm("Are you sure?")){
+                   alert("Vehicle is NFMC. Identifier Step No. {{ object.id }}");
+                   }
+                else
+                    {
+                        alert("Canceled - Vehicle is FMC");
+                    } //checked
+        }
+        else {
+            alert("Vehicle is FMC."); //not checked
+        }
+    });
+});
 
 </script>
 

@@ -18,7 +18,7 @@ from django.urls import path, include
 
 from pages.views import home_view, contact_view
 from training_manuals.views import training_manual_view, tm_detail_view, tm_complete
-from vehicles.views import vehicle_view, vehicle_create_view
+from vehicles.views import vehicle_view, vehicle_create_view, NFMC
 from django.views.generic.base import TemplateView
 
 # request.user
@@ -27,6 +27,7 @@ urlpatterns = [
     path('contact/', contact_view, name='contact'),
     path('vehicles/', vehicle_view, name='vehicle'),
     path('vehicles/create/', vehicle_create_view, name='create'),
+    path('vehicles/NFMC/<int:id>', NFMC, name='NFMC'),
     path('training_manual/<int:id>/', tm_detail_view, name='tm-detail'),
     path('training_manual/', training_manual_view, name='tm'),
     path('complete/', tm_complete, name='complete'),

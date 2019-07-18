@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block content %}
 <h1>Vehicles</h1>
 <div class="row">
+{% if request.user.is_superuser %}
     {% for vehicle in vehicles %}
     <div class="col">
         <div class="card" style="width: 18rem;">
-            <img src="{{ vehicle.image_url }}" class="card-img-top" alt="...">
+            <img src="{% static vehicle.image_url.url %}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{ vehicle.vehicle_id }}</h5>
                 <p class="card-text">{{ vehicle.vehicle_type }}</p>
@@ -16,6 +18,20 @@
     </div>
     {% endfor %}
 </div>
+{% else %}
+<div class="row">
+    <div class="col">
+        <div class="card" style="width: 18rem;">
+            <img src="{% static simple.image_url.url %}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ simple.vehicle_id }}</h5>
+                <p class="card-text">{{ simple.vehicle_type }}</p>
+                <a href="/training_manual/1/" class="btn btn-primary">Start PMCS</a>
+            </div>
+        </div>
+    </div>
+</div>
+ {% endif %}
 
 <style>
     .card-img-top {

@@ -150,13 +150,9 @@ USE_S3 = os.getenv('USE_S3')
 USE_S3 = True
 
 if USE_S3:
-    # aws settings
-    # os.getenv('AWS_ACCESS_KEY_ID')
-    AWS_ACCESS_KEY_ID = 'AKIAQ6BD6BANHZ6SB76O'
-    # os.getenv('AWS_SECRET_ACCESS_KEY')
-    AWS_SECRET_ACCESS_KEY = '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'
-    # os.getenv('AWS_STORAGE_BUCKET_NAME')
-    AWS_STORAGE_BUCKET_NAME = 'ipmcs-files'
+    AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
     AWS_DEFAULT_ACL = 'public-read'
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
@@ -166,6 +162,7 @@ if USE_S3:
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
     STATICFILES_LOCATION = 'static'
     MEDIAFILES_LOCATION = 'media'
 else:

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table class="table table-bordered table-dark table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Item No.</th>
+      <th scope="col">Interval</th>
+      <th scope="col">Location: Item to Check/Service</th>
+      <th scope="col">Crewmember Procedure</th>
+      <th class="table-warning" style="color: red;font-weight:bold" scope="col">Not Fully Mission Capable If</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ object.id }}</td>
+      <td>{{ object.interval }}</td>
+      <td>{{ object.location_item_to_check }}</td>
+      <td>{{ object.crewmember_procedure }}</td>
+      <td class="table-danger" style="color: black;">{{ object.nfmc_if }}<div class="form-check">
+          <input type="checkbox" class="form-check-input" id="NFMC">
+          <label class="form-check-label" for="NFMC" style="color: red;font-weight:bold">Check if vehicle is
+            NFMC</label>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="progress position-relative">
+  <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75"
+    aria-valuemin="0" aria-valuemax="100" style="width: {{ y }}%"></div>
+  <small class="justify-content-center d-flex position-absolute w-100">{{ y }}% complete</small>
+</div>
+<div>
+  <button style="background-color: #5db85d;color: white;width: 250px;height:50px;margin-top: 10px"
+    onclick="submitPoll(id);" id="myButton" class="float-left submit-button">Start Item No. {{ object.id }}</button>
+  <button style="background-color: #daad86;color: white;width: 250px;height:50px;margin-top: 10px" onclick="next();"
+    id="next" class="float-right submit-button" disabled=true>
+    <a class="text-success">Next</a>
+  </button>
+</div>
+<div align="center" id="container"></div>
+
+<script>
+  function submitPoll(id) {
+    document.getElementById("myButton").disabled = true;
+    var counter = 20;
+    var timerInt = setInterval(function () {
+      console.log(counter);
+      counter--
+      if (counter === 0) {
+        console.log("TASK COMPLETE!!");
+        clearInterval(timerInt);
+      }
+    }, 1000);
+    setTimeout(function () { alert('You need to complete this task in 2 minutes: ' + timerInt + ' seconds remaining') });
+    setTimeout(function () { document.getElementById("next").disabled = false; alert('Task Timer Complete!') }, 20000);
+  }
+  function next() {
+    window.location.href = "/{{ object_list }}/";
+  }
+
+  $("#myButton").click(function () {
+    $("#container").append('<p align="center" id="counter"></p></div><div class="spinner-grow text-primary" role="status">  <span class="sr-only">Loading...</span></div><div class="spinner-grow text-secondary" role="status">  <span class="sr-only">Loading...</span></div><div class="spinner-grow text-success" role="status">  <span class="sr-only">Loading...</span></div><div class="spinner-grow text-danger" role="status">  <span class="sr-only">Loading...</span></div><div class="spinner-grow text-warning" role="status">  <span class="sr-only">Loading...</span></div><div class="spinner-grow text-info" role="status">  <span class="sr-only">Loading...</span></div><div class="spinner-grow text-dark" role="status">  <span class="sr-only">Loading...</span></div>');
+  });
+  var countDownToDate = new Date(new Date().getTime() +  20*1000);
+  var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownToDate - now;
+    if(distance > 0) {
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      document.getElementById("counter").innerHTML = minutes + "m " + seconds + "s "; 
+    }
+  }, 1000);
+
+  jQuery(document).ready(function() {
+    jQuery('#NFMC').change(function() {
+        if ($(this).prop('checked')) {
+            if (confirm("Are you sure?")){
+                   alert("Vehicle is NFMC. Identifier Step No. {{ object.id }}");
+                   }
+                else
+                    {
+                        alert("Canceled - Vehicle is FMC");
+                    } //checked
+        }
+        else {
+            alert("Vehicle is FMC."); //not checked
+        }
+    });
+});
+
+</script>
+
+
+{% endblock %}

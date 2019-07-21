@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="card text-center">
+  <div class="card-header">
+    Non Mission Capable Vehicles
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Vehicle Identification Number: {{ veh.vehicle_id }}</h5>
+    <div>
+      <img src="{% static veh.image_url.url %}" class="card-img-top" alt="..." style="width:300px;height:200px;"></div>
+    <p class="card-text">Vehicle Type: {{ veh.vehicle_type }}</p>
+  </div>
+  <div class="card-footer text-muted">
+    {{ veh.updated }}
+  </div>
+</div>
+<table class="table table-bordered table-danger table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Vehicle No.</th>
+      <th scope="col">Item No.</th>
+      <th scope="col">Interval</th>
+      <th scope="col">Location: Item to Check/Service</th>
+      <th scope="col">Crewmember Procedure</th>
+      <th scope="col">Signed user: </th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ veh.vehicle_id }}</td>
+      <td>{{ object.id }}</td>
+      <td>{{ object.interval }}</td>
+      <td>{{ object.location_item_to_check }}</td>
+      <td>{{ object.crewmember_procedure }}</td>
+      <td>{{ user.first_name }} {{ user.last_name }}</td>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+{% endblock %}
